@@ -4,7 +4,8 @@ clear;
 
 
 %Paths
-DATASETPATH = 'PATH_TO_SAVE_PREPROCESSED_DATA'
+DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS003_20230227_024820.mat'
+%'PATH_TO_SAVE_PREPROCESSED_DATA'
 %TRIALINFOPATH =
 %TRIALINFO_COLUMN =
 %SAVELOCATIONPATH =
@@ -19,16 +20,16 @@ load(DATASETPATH); %<- this needs to be filled correctly each time
 
 %extract target trials and all channels for topoplot
 cfg = [];
-cfg.trials = find(export_data.trialinfo==0);
-ntrg_trials_allchan = ft_selectdata(cfg, export_data);
+cfg.trials = find(trial_data.trialinfo(:,1)==1);
+ntrg_trials_allchan = ft_selectdata(cfg, trial_data);
 
 %extract target trials and all channels for topoplot
 cfg = [];
-cfg.trials = find(export_data.trialinfo==1);
-trgt_trials_allchan = ft_selectdata(cfg, export_data);
+cfg.trials = find(trial_data.trialinfo(:,1)==2);
+trgt_trials_allchan = ft_selectdata(cfg, trial_data);
 
-cfg = [];
-data = ft_timelockanalysis(cfg,trgt_trials_allchan);
+%cfg = [];
+%data = ft_timelockanalysis(cfg,trgt_trials_allchan);
 % ft_movieplotER(cfg,data)
 
 %BETTER RENDER (from base ft_topoplotER.m)
@@ -37,7 +38,7 @@ frames = struct('cdata',cell(1,length(trgt_trials_allchan.time{1,1})), 'colormap
 
 cfg = [];
 %fig = open_figure(keepfields(cfg,{'figure','position','visible','renderer'}));
-cfg.layout = ft_prepare_layout(cfg,trgt_trials_allchan);
+cfg.layout = 'GSN-HydroCel-129.sfp'; %ft_prepare_layout(cfg,trgt_trials_allchan);
 cfg.interactive = 'no';
 cfg.comment = 'xlim';
 cfg.figure = gcf;
@@ -64,8 +65,8 @@ cfg.dataname = "anim";
 for i = 1:length(trgt_trials_allchan.time{1,1})
     cfg.xlim = [trgt_trials_allchan.time{1,1}(1,i) trgt_trials_allchan.time{1,1}(1,i)];
     
-    %ft_topoplotER(cfg, trgt_trials_allchan);
-    cfg = topoplot_common(cfg,trgt_trials_allchan);
+    ft_topoplotER(cfg, trgt_trials_allchan);
+    %cfg = topoplot_common(cfg,trgt_trials_allchan);
     
     % indy = i;
     % datavector = reshape(mean(parameter(:,indy,indx),3), [size(parameter,1) 1]);
