@@ -4,9 +4,9 @@ clear;
 
 
 %Paths
-DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS003_20230227_024820.mat'; %should be processed
+DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS003_20230227_024820.mat';
 SAVENAME = 'ATP2resave20fps.avi'; %should end in .avi
-SAVEPATH = 'A:\Users\Ali Amusat\Desktop\'; %where to save the video
+SAVEPATH = 'A:\Users\Ali Amusat\Desktop\';
 frate = 5; %framerate, default 30, smaller = slower
 
 %Parameters
@@ -73,7 +73,7 @@ if preview_before_save
 end
 
 to = append(SAVEPATH,SAVENAME);
-disp("Saving animation to <"+to+"> please wait...")
+disp("Saving animation to <"+to+"> Please wait")
 
 
 v = VideoWriter(to);
