@@ -3,13 +3,13 @@ clear;
 
 
 
-%Paths
-DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS003_20230227_024820.mat';
+%paths
+DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS003_20230227_024820.mat'; %should be processed
 SAVENAME = 'ATP2resave20fps.avi'; %should end in .avi
-SAVEPATH = 'A:\Users\Ali Amusat\Desktop\';
+SAVEPATH = 'A:\Users\Ali Amusat\Desktop\'; %where to save the video
 frate = 5; %framerate, default 30, smaller = slower
 
-%Parameters
+%parameters
 DEFINEDzlim = [-2.5 2.33];
 preview_before_save = false;
 
@@ -18,15 +18,17 @@ preview_before_save = false;
 load(DATASETPATH);
 
 %extract target trials and all channels for topoplot
-%ensure cfg.trials is pointed at the right spot in your preprocessed data
-%this may include pointing to a specific column or row depending on how
-%that data is organized
+    %ensure cfg.trials is pointed at the right spot in your preprocessed data
+    %this may include pointing to a specific column or row depending on how
+    %that data is organized
 cfg = [];
 cfg.trials = find(trial_data.trialinfo(:,1)==2);
 trgt_trials_allchan = ft_selectdata(cfg, trial_data);
 trgt_trials_allchan = fixsampleinfo(trgt_trials_allchan);
 
-
+%movieplotER 
+%it can produce an animation faster, useful if you want to preview the data
+%before commiti
 %cfg = [];
 %data = ft_timelockanalysis(cfg,trgt_trials_allchan);
 % ft_movieplotER(cfg,data)
@@ -73,7 +75,7 @@ if preview_before_save
 end
 
 to = append(SAVEPATH,SAVENAME);
-disp("Saving animation to <"+to+"> Please wait")
+disp("Saving animation to <"+to+"> please wait...")
 
 
 v = VideoWriter(to);
