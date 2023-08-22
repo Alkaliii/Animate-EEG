@@ -4,10 +4,10 @@ clear;
 
 
 %paths
-DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS003_20230227_024820.mat'; %should be processed
-SAVENAME = 'ATP2resave20fps.avi'; %should end in .avi
+DATASETPATH = 'D:\datasets\SavannaExpICA\epoched\MS007_20230302_121700.mat'; %should be processed
+SAVENAME = 'animation.avi'; %should end in .avi
 SAVEPATH = 'A:\Users\Ali Amusat\Desktop\'; %where to save the video
-frate = 5; %framerate, default 30, smaller = slower
+frate = 30; %framerate, default 30, smaller = slower
 
 %parameters
 DEFINEDzlim = [-2.5 2.33];
